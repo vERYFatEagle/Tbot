@@ -2,10 +2,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
+
+var BananaSum int = 0
 
 func main() {
 
@@ -27,13 +30,24 @@ func main() {
 		if update.Message == nil { // ignore any non-Message Updates
 			continue
 		}
+		switch update.Message.Text {
+		case "+":
 
-		log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
+			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-		msg.ReplyToMessageID = update.Message.MessageID
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Спасибо за банан")
+			//msg.ReplyToMessageID = update.Message.MessageID
 
-		bot.Send(msg)
+			bot.Send(msg)
+
+			textSUM := fmt.Sprintf("Теперь у меня %d", BananaSum)
+			msg = tgbotapi.NewMessage(update.Message.Chat.ID, textSUM)
+			//msg.ReplyToMessageID = update.Message.MessageID
+
+			bot.Send(msg)
+			BananaSum++
+		}
+
 	}
 
 }
