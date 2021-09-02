@@ -69,7 +69,8 @@ tgbotapi.NewKeyboardButtonContact("contact(2,3)"),
 
             ),
         },
-    }bot.creatReplyKeyboardMarkup(update.Message.Chat.ID int64)
- 
+    }
+
 bot.creatReplyKeyboardMarkup(update.Message.Chat.ID int64)
+ 
 }
