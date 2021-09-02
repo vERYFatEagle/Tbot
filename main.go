@@ -12,7 +12,7 @@ var BananaSum int = 0
 
 func main() {
 
-	bot, err := tgbotapi.NewBotAPI("")
+	bot, err := tgbotapi.NewBotAPI("1969957819:AAH4BcGJlZlZ9r_Q7s-zmSX7d-3vwlOA_qM")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -30,22 +30,24 @@ func main() {
 		if update.Message == nil { // ignore any non-Message Updates
 			continue
 		}
+
 		switch update.Message.Text {
-		case "+":
+		case "\xF0\x9F\x8D\x8C":
 
 			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
 
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Спасибо за банан")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Спасибо за \xF0\x9F\x8D\x8C")
 			//msg.ReplyToMessageID = update.Message.MessageID
 
 			bot.Send(msg)
 
-			textSUM := fmt.Sprintf("Теперь у меня %d", BananaSum)
+			textSUM := fmt.Sprintf("Теперь у меня %d \xF0\x9F\x8D\x8C ", BananaSum)
 			msg = tgbotapi.NewMessage(update.Message.Chat.ID, textSUM)
 			//msg.ReplyToMessageID = update.Message.MessageID
 
 			bot.Send(msg)
 			BananaSum++
+
 		}
 
 	}
